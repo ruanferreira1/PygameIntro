@@ -12,4 +12,8 @@ class Bloco(pygame.sprite.Sprite):
     def cair(self):
         self.rect.y += 20
 
+    def mover(self, x, y):
+        self.rect.x = x
+        self.rect.y = y
+
 

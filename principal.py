@@ -28,6 +28,10 @@ while True:
             pygame.quit()
         if event.type == pygame.KEYDOWN:
             tecla = pygame.key.get_pressed()
+
+            if tecla[pygame.K_F1]:
+               print("F1")
+
             if tecla[pygame.K_DOWN]:
                 bloco.cair()
                 bateu = pygame.sprite.collide_rect(bloco, grama)
@@ -37,22 +41,3 @@ while True:
     tela.fill(PRETO)
     listaSprites.draw(tela)
     pygame.display.update()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

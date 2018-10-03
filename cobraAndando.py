@@ -3,8 +3,8 @@ from cobra import Cobra
 
 LARGURA = 800
 ALTURA = 500
-FPS = 100
-
+FPS = 200
+terminou = False
 # define colors
 BRANCO = (255, 255, 255)
 # initialize pygame and create window
@@ -17,10 +17,10 @@ clock = pygame.time.Clock()  # controle do tempo para atualização da tela
 
 # grupo de personagens
 listaSprites = pygame.sprite.Group()
-cobra = Cobra(-420, 100)
+cobra = Cobra(-235, 100)
 listaSprites.add(cobra)
 
-while True:
+while terminou == False:
     # mantem o jogo rodando na velocidade correta
     clock.tick(FPS)   # frequência de atualização
 
@@ -28,13 +28,16 @@ while True:
     for event in pygame.event.get():
         # verifica fechamento da janela
         if event.type == pygame.QUIT:
-            pygame.quit()
+            terminou = True
 
     cobra.andar()
+
     if cobra.rect.x > 800:
-        cobra.rect.x = -420
+        cobra.rect.x = -235
 
     # atualiza tela
     tela.fill(BRANCO)
     listaSprites.draw(tela)
     pygame.display.update()
+
+pygame.quit()
