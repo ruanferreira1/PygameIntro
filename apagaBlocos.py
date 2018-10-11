@@ -61,6 +61,7 @@ while True:
 
 
     tela.fill(PRETO)
-    tela.blit(texto, (0, 0))  # texto + coordenadas
     todosObjetos.draw(tela)
+    tela.blit(texto, (0, 0))  # texto + coordenadas
+
     pygame.display.update()
