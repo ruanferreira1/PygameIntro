@@ -1,53 +1,66 @@
-import pygame
+import pygame, random
+from bloco import Bloco
 import random
 
 #Definindo cores
 PRETO = (0, 0, 0)
 BRANCO = (255, 255, 255)
 VERMELHO = (255, 0, 0)
-VERDE = (255, 255, 0)
+AMARELO = (255, 255, 0)
+PRATA = (192,192,192)
 
-class Bloco(pygame.sprite.Sprite):
-    def __init__(self, cor, largura, altura):
-        super().__init__()    #chama o construtor da superclasse
-        self.image = pygame.Surface([largura, altura])
-        self.image.fill(cor)
-        self.rect = self.image.get_rect()    # pega coordenadas
-
-
-
-# -- bloco principal
+# -- criação da tela
 pygame.init()
-largura = 600
-altura = 400
-tela = pygame.display.set_mode([largura, altura])
-listaBlocos = pygame.sprite.Group()
-listaSprites = pygame.sprite.Group()
+fonte = pygame.font.SysFont("comicsansms", 30)
+LARGURA = 600
+ALTURA = 400
+pontos = 0
+tela = pygame.display.set_mode([LARGURA, ALTURA])
+pygame.display.set_caption("Come Blocos")
+mouse = pygame.mouse     # encurta o nome
+mouse.set_visible(False) # esconde o ponteiro
+amarelos = pygame.sprite.Group()       # blocos amarelos
+todosObjetos = pygame.sprite.Group()   # todos blocos
 
-
-x = 0
-y = 0
 for i in range (20):
-        bloco = Bloco(VERDE, 40, 20)
-        bloco.rect.x = random.randrange(largura)
-        bloco.rect.y = random.randrange(altura)
-        listaBlocos.add(bloco)
+    x = random.randrange(LARGURA)
+    y = random.randrange(ALTURA)
+    bloco = Bloco(AMARELO, 40, 20, x, y)
+    amarelos.add(bloco)
 
-listaSprites.add(listaBlocos)
-blocoVermelho = Bloco(VERMELHO, 40, 20)
-blocoVermelho.rect.x = random.randrange(largura)
-blocoVermelho.rect.y = random.randrange(altura)
-listaSprites.add(blocoVermelho)
+todosObjetos.add(amarelos)
+x = random.randrange(LARGURA)
+y = random.randrange(ALTURA)
+blocoVermelho = Bloco(VERMELHO, 40, 20, x, y)
+todosObjetos.add(blocoVermelho)
+
 
 while True:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+    filaEventos = pygame.event.get()
+    # percorre a fila de eventos
+    for evento in filaEventos:
+        if evento.type == pygame.QUIT:
             pygame.quit()
             exit()
+        if evento.type == pygame.KEYDOWN:
+            tecla = pygame.key.get_pressed()
+            if tecla[pygame.K_F1]:
+                print("F1")
+            if tecla[pygame.K_ESCAPE]:
+                pygame.quit()
+                exit()
+
+        if evento.type == pygame.MOUSEMOTION:
+            pos = mouse.get_pos()
+            blocoVermelho.mover(pos[0], pos[1])
+            lista = []
+            lista = pygame.sprite.spritecollide(blocoVermelho, amarelos, True)
+            pontos += len(lista)
+            # texto, antialias, cor, fundo (opcional)
+            texto = fonte.render("Pontos: " + str(pontos), True, (BRANCO))
+
+
     tela.fill(PRETO)
-    pos = pygame.mouse.get_pos()
-    blocoVermelho.rect.x = pos[0]
-    blocoVermelho.rect.y = pos[1]
-    pygame.sprite.spritecollide(blocoVermelho, listaBlocos, True)
-    listaSprites.draw(tela)
+    tela.blit(texto, (0, 0))  # texto + coordenadas
+    todosObjetos.draw(tela)
     pygame.display.update()

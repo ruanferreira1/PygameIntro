@@ -11,9 +11,11 @@ BRANCO = (255, 255, 255)
 pygame.init()
 pygame.font.init()
 fonte = pygame.font.SysFont('Calibri', 30)
+clock = pygame.time.Clock()  # controle do tempo para atualização da tela
+fps = 30
 tela = pygame.display.set_mode((LARGURA, ALTURA))
 pygame.display.set_caption("Cobrinha")
-clock = pygame.time.Clock()  # controle do tempo para atualização da tela
+
 
 # grupo de personagens
 listaSprites = pygame.sprite.Group()
@@ -22,7 +24,7 @@ listaSprites.add(cobra)
 
 while terminou == False:
     # mantem o jogo rodando na velocidade correta
-    clock.tick(FPS)   # frequência de atualização
+    clock.tick(fps)   # frequência de atualização
 
     # processa input (eventos)
     for event in pygame.event.get():
