@@ -5,9 +5,9 @@ import pygame
 class Bicho(pygame.sprite.Sprite):
     def __init__(self, x, y):
         super().__init__()
-        self.setaDireita = pygame.image.load("direita.png").convert_alpha()
-        self.setaEsquerda = pygame.image.load("esquerda.png").convert_alpha()
-        self.image = self.setaDireita
+        self.ladoDireito = pygame.image.load("direita.png").convert_alpha()
+        self.ladoEsquerdo = pygame.image.load("esquerda.png").convert_alpha()
+        self.image = self.ladoDireito
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
@@ -15,10 +15,10 @@ class Bicho(pygame.sprite.Sprite):
     def definirImagem(self):
         tecla = pygame.key.get_pressed()
         if tecla[pygame.K_RIGHT]:
-            self.image = self.setaDireita
+            self.image = self.ladoDireito
             self.rect.x += 2
         if tecla[pygame.K_LEFT]:
-            self.image = self.setaEsquerda
+            self.image = self.ladoEsquerdo
             self.rect.x -= 2
 
 
