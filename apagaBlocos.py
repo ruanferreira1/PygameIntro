@@ -27,6 +27,7 @@ for i in range (20):
     x = random.randrange(LARGURA - 40)
     y = random.randrange(ALTURA - 20)
     bloco = Bloco(AMARELO, 40, 20, x, y)
+    bloco.numero = i
     amarelos.add(bloco)
 
 todosObjetos.add(amarelos)
@@ -55,6 +56,10 @@ while True:
             blocoVermelho.mover(pos[0], pos[1])
             lista = []
             lista = pygame.sprite.spritecollide(blocoVermelho, amarelos, True)
+
+            for e in lista:
+                print(e.numero)
+
             pontos += len(lista)
             # texto, antialias, cor, fundo (opcional)
             texto = fonte.render("Pontos: " + str(pontos), True, (BRANCO))

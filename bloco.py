@@ -9,12 +9,16 @@ class Bloco(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
+
     def mover(self, x, y):
         self.rect.x = x
         self.rect.y = y
 
     def cair(self):
         self.rect.y += 20
+
+    def andarDireita(self):
+        self.rect.x +=1
 
 class Circulo(pygame.sprite.Sprite):
     def __init__(self, x, y):  # posição x,y

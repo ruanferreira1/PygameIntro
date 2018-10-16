@@ -21,9 +21,11 @@ while sair == False:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sair = True
-        if event.type == pygame.MOUSEMOTION:
-            x, y = pygame.mouse.get_pos()
-            bloco.mover(x, y)
+        if event.type == pygame.KEYDOWN:
+            tecla = pygame.key.get_pressed()
+            if tecla[pygame.K_F1]:
+                print("F1")
+
 
     tela.blit(fundo, (0,0))    # põe o objeto na tela na posição especificada
     sprites.draw(tela)         # desenha demais objetos

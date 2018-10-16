@@ -22,8 +22,7 @@ while sair == False:
             contador += 1  # conta cada vez que o mouse é mexido
 
     tela.fill((0, 0, 0))
-    texto = fonte.render("Vezes: " + str(contador),
-            True, (255, 0, 0))
+    texto = fonte.render("Vezes: " + str(contador),True, (255, 0, 0))
     #texto, antialias, cor, fundo (opcional)
     tela.blit(texto, (0, 0))   #coordenadas
     pygame.display.update()
